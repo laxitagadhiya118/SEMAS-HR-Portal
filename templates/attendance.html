@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Attendance Management</h1>
+        <p>Track employee attendance records, working hours and daily status.</p>
+    </div>
+</div>
+
+<div class="toolbar-card">
+    <div>
+        <h5 class="mb-0">Attendance Records</h5>
+        <small class="text-muted">View and manage employee attendance entries.</small>
+    </div>
+
+    <div class="toolbar-actions">
+        <a href="/add-attendance" class="btn btn-success">
+            + Add Attendance
+        </a>
+
+        <a href="/export-attendance-pdf" class="btn btn-outline-danger">
+            Export PDF
+        </a>
+    </div>
+</div>
+
+<div class="data-card">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle company-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Date</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>#{{ record["id"] }}</td>
+
+                    <td>
+                        <strong>
+                            {{ record["first_name"] }} {{ record["last_name"] }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ record["date"] }}
+                    </td>
+
+                    <td>
+                        {% if record["check_in"] %}
+                            {{ record["check_in"] }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if record["check_out"] %}
+                            {{ record["check_out"] }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% set status = record["status"] | lower | trim %}
+
+                        {% if status == "present" %}
+                            <span class="status-badge present-badge">Present</span>
+
+                        {% elif status == "absent" %}
+                            <span class="status-badge absent-badge">Absent</span>
+
+                        {% elif status == "late" %}
+                            <span class="status-badge late-badge">Late</span>
+
+                        {% else %}
+                            <span class="status-badge inactive-badge">
+                                {{ record["status"] }}
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

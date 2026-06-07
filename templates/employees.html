@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Employee Directory</h1>
+        <p>Manage employee records, departments, roles and employment status.</p>
+    </div>
+</div>
+
+<div class="toolbar-card">
+
+    <form method="GET" action="/employees" class="search-form">
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search by name, email, department or position"
+               value="{{ search }}">
+
+        <button type="submit" class="btn btn-primary">
+            Search
+        </button>
+
+        <a href="/employees" class="btn btn-outline-secondary">
+            Reset
+        </a>
+    </form>
+
+    <div class="toolbar-actions">
+        <a href="/add-employee" class="btn btn-success">
+            + Add Employee
+        </a>
+
+        <a href="/export-employees" class="btn btn-outline-primary">
+            Export CSV
+        </a>
+
+        <a href="/export-employees-pdf" class="btn btn-outline-danger">
+            Export PDF
+        </a>
+    </div>
+
+</div>
+
+<div class="data-card">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle company-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Contact</th>
+                    <th>Department</th>
+                    <th>Position</th>
+                    <th>Hire Date</th>
+                    <th>Salary</th>
+                    <th>Status</th>
+                    <th style="width: 180px;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>#{{ employee["id"] }}</td>
+
+                    <td>
+                        <strong>
+                            {{ employee["first_name"] }} {{ employee["last_name"] }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        <div>{{ employee["email"] }}</div>
+                        <small class="text-muted">{{ employee["phone"] }}</small>
+                    </td>
+
+                    <td>{{ employee["department"] }}</td>
+
+                    <td>{{ employee["position"] }}</td>
+
+                    <td>{{ employee["hire_date"] }}</td>
+
+                    <td>€{{ employee["salary"] }}</td>
+
+                    <td>
+                        {% if employee["status"] == "Active" %}
+                            <span class="status-badge active-badge">Active</span>
+                        {% else %}
+                            <span class="status-badge inactive-badge">Inactive</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="/edit-employee/{{ employee['id'] }}"
+                               class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+
+                            <a href="/delete-employee/{{ employee['id'] }}"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Are you sure you want to delete this employee?')">
+                                Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

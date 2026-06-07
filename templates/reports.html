@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Reports Center</h1>
+        <p>Download employee, attendance and leave management reports.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="data-card h-100">
+            <h4>Employee Reports</h4>
+            <p class="text-muted">
+                Export complete employee records including department, position, salary and status.
+            </p>
+
+            <div class="d-flex gap-2 flex-wrap">
+                <a href="/export-employees" class="btn btn-outline-primary">
+                    Export CSV
+                </a>
+
+                <a href="/export-employees-pdf" class="btn btn-outline-danger">
+                    Export PDF
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="data-card h-100">
+            <h4>Attendance Reports</h4>
+            <p class="text-muted">
+                Download attendance records including check-in, check-out and attendance status.
+            </p>
+
+            <a href="/export-attendance-pdf" class="btn btn-outline-danger">
+                Export PDF
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="data-card h-100">
+            <h4>Leave Reports</h4>
+            <p class="text-muted">
+                Export leave request records with approval status and employee details.
+            </p>
+
+            <a href="/export-leave-pdf" class="btn btn-outline-danger">
+                Export PDF
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div>
+        <h1>Workforce Management Dashboard</h1>
+        <p>
+            Welcome back, Admin. Monitor employees, attendance records,
+            leave requests and HR analytics from one centralized portal.
+        </p>
+    </div>
+</section>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h6>Total Employees</h6>
+            <h2>{{ total_employees }}</h2>
+            <p>Registered employees</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h6>Active Employees</h6>
+            <h2>{{ active_employees }}</h2>
+            <p>Currently active staff</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h6>Attendance Records</h6>
+            <h2>{{ total_attendance }}</h2>
+            <p>Total attendance entries</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h6>Pending Leaves</h6>
+            <h2>{{ pending_leaves }}</h2>
+            <p>Waiting for approval</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h4>Employees by Department</h4>
+            <p class="text-muted">Department-wise employee distribution</p>
+
+            <div style="height: 320px;">
+                <canvas id="departmentChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h4>Attendance Status</h4>
+            <p class="text-muted">Present, absent and late attendance overview</p>
+
+            <div style="height: 320px;">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h4>Leave Request Status</h4>
+            <p class="text-muted">Pending, approved and rejected leave requests</p>
+
+            <div style="height: 320px;">
+                <canvas id="leaveChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const departments = {{ departments | tojson | safe }};
+    const departmentCounts = {{ department_counts | tojson | safe }};
+
+    const attendanceStatuses = {{ attendance_statuses | tojson | safe }};
+    const attendanceCounts = {{ attendance_counts | tojson | safe }};
+
+    const leaveStatuses = {{ leave_statuses | tojson | safe }};
+    const leaveCounts = {{ leave_counts | tojson | safe }};
+
+    function getAttendanceColors(statuses) {
+        return statuses.map(status => {
+            const s = status.toLowerCase();
+
+            if (s === "present") {
+                return "#22c55e";
+            }
+
+            if (s === "absent") {
+                return "#ef4444";
+            }
+
+            if (s === "late") {
+                return "#f59e0b";
+            }
+
+            return "#94a3b8";
+        });
+    }
+
+    function getLeaveColors(statuses) {
+        return statuses.map(status => {
+            const s = status.toLowerCase();
+
+            if (s === "approved") {
+                return "#22c55e";
+            }
+
+            if (s === "rejected") {
+                return "#ef4444";
+            }
+
+            if (s === "pending") {
+                return "#f59e0b";
+            }
+
+            return "#94a3b8";
+        });
+    }
+
+    new Chart(document.getElementById("departmentChart"), {
+        type: "bar",
+        data: {
+            labels: departments,
+            datasets: [{
+                label: "Employees",
+                data: departmentCounts,
+                backgroundColor: "#0d6efd",
+                borderColor: "#0b5ed7",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("attendanceChart"), {
+        type: "doughnut",
+        data: {
+            labels: attendanceStatuses,
+            datasets: [{
+                label: "Attendance",
+                data: attendanceCounts,
+                backgroundColor: getAttendanceColors(attendanceStatuses),
+                borderColor: "#ffffff",
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: "bottom"
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("leaveChart"), {
+        type: "doughnut",
+        data: {
+            labels: leaveStatuses,
+            datasets: [{
+                label: "Leave Requests",
+                data: leaveCounts,
+                backgroundColor: getLeaveColors(leaveStatuses),
+                borderColor: "#ffffff",
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: "bottom"
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Add Leave Request</h1>
+        <p>Create a new employee leave request and submit it for approval.</p>
+    </div>
+</div>
+
+<div class="form-card">
+
+    <form method="POST">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Employee</label>
+                <select name="employee_id" class="form-select" required>
+                    {% for employee in employees %}
+                    <option value="{{ employee['id'] }}">
+                        {{ employee['first_name'] }} {{ employee['last_name'] }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Leave Type</label>
+                <select name="leave_type" class="form-select" required>
+                    <option value="Sick Leave">Sick Leave</option>
+                    <option value="Vacation Leave">Vacation Leave</option>
+                    <option value="Personal Leave">Personal Leave</option>
+                    <option value="Emergency Leave">Emergency Leave</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Start Date</label>
+                <input type="date" name="start_date" class="form-control" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">End Date</label>
+                <input type="date" name="end_date" class="form-control" required>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Reason</label>
+                <textarea name="reason"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Enter leave reason"></textarea>
+            </div>
+
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-success">
+                Submit Leave Request
+            </button>
+
+            <a href="/leave-requests" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Leave Management</h1>
+        <p>Review, approve and manage employee leave requests.</p>
+    </div>
+</div>
+
+<div class="toolbar-card">
+    <div>
+        <h5 class="mb-0">Leave Requests</h5>
+        <small class="text-muted">Track pending, approved and rejected leave applications.</small>
+    </div>
+
+    <div class="toolbar-actions">
+        <a href="/add-leave-request" class="btn btn-success">
+            + Add Leave Request
+        </a>
+
+        <a href="/export-leave-pdf" class="btn btn-outline-danger">
+            Export PDF
+        </a>
+    </div>
+</div>
+
+<div class="data-card">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle company-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th style="width: 190px;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td>#{{ request["id"] }}</td>
+
+                    <td>
+                        <strong>
+                            {{ request["first_name"] }} {{ request["last_name"] }}
+                        </strong>
+                    </td>
+
+                    <td>{{ request["leave_type"] }}</td>
+
+                    <td>{{ request["start_date"] }}</td>
+
+                    <td>{{ request["end_date"] }}</td>
+
+                    <td>
+                        {% if request["reason"] %}
+                            {{ request["reason"] }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% set status = request["status"] | lower | trim %}
+
+                        {% if status == "approved" %}
+                            <span class="status-badge approved-badge">Approved</span>
+
+                        {% elif status == "rejected" %}
+                            <span class="status-badge rejected-badge">Rejected</span>
+
+                        {% elif status == "pending" %}
+                            <span class="status-badge pending-badge">Pending</span>
+
+                        {% else %}
+                            <span class="status-badge inactive-badge">
+                                {{ request["status"] }}
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="/approve-leave/{{ request['id'] }}"
+                               class="btn btn-sm btn-success">
+                                Approve
+                            </a>
+
+                            <a href="/reject-leave/{{ request['id'] }}"
+                               class="btn btn-sm btn-danger">
+                                Reject
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
