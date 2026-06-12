@@ -39,7 +39,7 @@ a {
     padding: 25px 18px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     position: fixed;
     top: 0;
     left: 0;
@@ -66,80 +66,94 @@ a {
 }
 
 /* =========================
-   SIDEBAR LIST VIEW
+   3 DOTS DROPDOWN SIDEBAR
 ========================= */
 
-.sidebar-menu {
-    margin-top: 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
-
-.sidebar-list-item {
+.menu-toggle {
     width: 100%;
-}
-
-.sidebar-list-item a {
+    margin-top: 28px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 14px;
-    width: 100%;
-    padding: 15px 18px;
-    background: rgba(255, 255, 255, 0.10);
-    color: #dbeafe;
-    border-radius: 15px;
-    font-size: 15px;
-    font-weight: 700;
-    border-left: 5px solid transparent;
-    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.15);
+    justify-content: flex-start;
+    gap: 12px;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.sidebar-list-item a:hover {
+.dots-icon {
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.menu-label {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.menu-toggle:hover {
+    background: #ffffff;
+    color: #1e3a8a;
+    transform: translateX(4px);
+}
+
+/* Dropdown menu hidden by default */
+.sidebar-menu {
+    display: none;
+    margin-top: 14px;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(15, 23, 42, 0.35);
+    padding: 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Dropdown menu visible after click */
+.sidebar-menu.show-menu {
+    display: flex;
+}
+
+.nav-item {
+    display: block;
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.10);
+    color: #dbeafe;
+    border-radius: 13px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1.4;
+    border-left: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
     background: #ffffff;
     color: #1e3a8a;
     border-left: 5px solid #60a5fa;
-    transform: translateX(6px);
+    transform: translateX(5px);
 }
 
-.menu-icon {
-    font-size: 18px;
-    width: 26px;
-    text-align: center;
-}
-
-.menu-text {
-    display: inline-block;
-}
-
-/* Sidebar logout button */
-
-.sidebar-footer {
-    padding-top: 22px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.sidebar-footer a {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
-    padding: 15px 18px;
-    background: rgba(239, 68, 68, 0.18);
+.logout-item {
+    background: rgba(239, 68, 68, 0.20);
     color: #fee2e2;
-    border-radius: 15px;
-    font-size: 15px;
-    font-weight: 700;
-    border-left: 5px solid transparent;
-    transition: all 0.3s ease;
+    margin-top: 8px;
 }
 
-.sidebar-footer a:hover {
+.logout-item:hover {
     background: #ffffff;
     color: #dc2626;
     border-left: 5px solid #ef4444;
-    transform: translateX(6px);
 }
 
 /* =========================
@@ -537,6 +551,11 @@ a {
 
     .page-content {
         padding: 20px;
+    }
+
+    .nav-item {
+        font-size: 14px;
+        padding: 12px 13px;
     }
 }
 
