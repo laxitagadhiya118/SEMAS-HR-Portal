@@ -2,87 +2,111 @@
 
 {% block content %}
 
-<section class="hero-section">
-    <div>
-        <h1>Workforce Management Dashboard</h1>
+<!-- Business Hero Section -->
+<section class="hero-section business-hero">
+    <div class="hero-text">
+        <span class="hero-badge">HR Management Dashboard</span>
+
+        <h1>Welcome back, Admin</h1>
+
         <p>
-            Welcome back, Admin. Monitor employees, attendance records,
-            leave requests and HR analytics from one centralized portal.
+            Monitor employees, attendance, leave requests and workforce reports from one smart dashboard.
         </p>
+
+        <div class="hero-actions">
+            <a href="/add-employee" class="btn btn-light">+ Add Employee</a>
+            <a href="/reports" class="btn btn-outline-light">View Reports</a>
+        </div>
+    </div>
+
+    <div class="hero-summary">
+        <div>
+            <strong>SEMAS</strong>
+            <span>Workforce Platform</span>
+        </div>
     </div>
 </section>
 
-<div class="row g-4 mb-4">
+<!-- Dashboard Cards -->
+<div class="row">
 
     <div class="col-md-3">
         <div class="dashboard-card">
-            <h6>Total Employees</h6>
+            <h5>Total Workforce</h5>
             <h2>{{ total_employees }}</h2>
-            <p>Registered employees</p>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="dashboard-card">
-            <h6>Active Employees</h6>
+            <h5>Active Staff</h5>
             <h2>{{ active_employees }}</h2>
-            <p>Currently active staff</p>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="dashboard-card">
-            <h6>Attendance Records</h6>
+            <h5>Attendance Logs</h5>
             <h2>{{ total_attendance }}</h2>
-            <p>Total attendance entries</p>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="dashboard-card">
-            <h6>Pending Leaves</h6>
+            <h5>Pending Leaves</h5>
             <h2>{{ pending_leaves }}</h2>
-            <p>Waiting for approval</p>
         </div>
     </div>
 
 </div>
 
-<div class="row g-4">
+<!-- Charts Section -->
+<div class="row">
 
     <div class="col-md-6">
         <div class="chart-card">
             <h4>Employees by Department</h4>
-            <p class="text-muted">Department-wise employee distribution</p>
-
-            <div style="height: 320px;">
-                <canvas id="departmentChart"></canvas>
-            </div>
+            <canvas id="departmentChart"></canvas>
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="chart-card">
             <h4>Attendance Status</h4>
-            <p class="text-muted">Present, absent and late attendance overview</p>
+            <canvas id="attendanceChart"></canvas>
+        </div>
+    </div>
 
-            <div style="height: 320px;">
-                <canvas id="attendanceChart"></canvas>
-            </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h4>Leave Request Status</h4>
+            <canvas id="leaveChart"></canvas>
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="chart-card">
-            <h4>Leave Request Status</h4>
-            <p class="text-muted">Pending, approved and rejected leave requests</p>
+            <h4>System Overview</h4>
+            <p class="text-muted">
+                SEMAS helps HR teams manage employee records, attendance tracking,
+                leave approvals and workforce reports in one centralized platform.
+            </p>
 
-            <div style="height: 320px;">
-                <canvas id="leaveChart"></canvas>
+            <div class="mt-4">
+                <a href="/employees" class="btn btn-primary me-2">Manage Employees</a>
+                <a href="/attendance" class="btn btn-outline-primary">View Attendance</a>
             </div>
         </div>
     </div>
 
+</div>
+
+<div class="footer-note">
+    © 2026 SEMAS HR Portal | Smart Employee Management & Analytics System
 </div>
 
 {% endblock %}
@@ -105,17 +129,9 @@
         return statuses.map(status => {
             const s = status.toLowerCase();
 
-            if (s === "present") {
-                return "#22c55e";
-            }
-
-            if (s === "absent") {
-                return "#ef4444";
-            }
-
-            if (s === "late") {
-                return "#f59e0b";
-            }
+            if (s === "present") return "#22c55e";
+            if (s === "absent") return "#ef4444";
+            if (s === "late") return "#f59e0b";
 
             return "#94a3b8";
         });
@@ -125,17 +141,9 @@
         return statuses.map(status => {
             const s = status.toLowerCase();
 
-            if (s === "approved") {
-                return "#22c55e";
-            }
-
-            if (s === "rejected") {
-                return "#ef4444";
-            }
-
-            if (s === "pending") {
-                return "#f59e0b";
-            }
+            if (s === "approved") return "#22c55e";
+            if (s === "rejected") return "#ef4444";
+            if (s === "pending") return "#f59e0b";
 
             return "#94a3b8";
         });
@@ -148,17 +156,15 @@
             datasets: [{
                 label: "Employees",
                 data: departmentCounts,
-                backgroundColor: "#0d6efd",
-                borderColor: "#0b5ed7",
-                borderWidth: 1
+                backgroundColor: "#2563eb",
+                borderRadius: 8
             }]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: true
+                    display: false
                 }
             },
             scales: {
@@ -177,21 +183,12 @@
         data: {
             labels: attendanceStatuses,
             datasets: [{
-                label: "Attendance",
                 data: attendanceCounts,
-                backgroundColor: getAttendanceColors(attendanceStatuses),
-                borderColor: "#ffffff",
-                borderWidth: 2
+                backgroundColor: getAttendanceColors(attendanceStatuses)
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: "bottom"
-                }
-            }
+            responsive: true
         }
     });
 
@@ -200,21 +197,12 @@
         data: {
             labels: leaveStatuses,
             datasets: [{
-                label: "Leave Requests",
                 data: leaveCounts,
-                backgroundColor: getLeaveColors(leaveStatuses),
-                borderColor: "#ffffff",
-                borderWidth: 2
+                backgroundColor: getLeaveColors(leaveStatuses)
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: "bottom"
-                }
-            }
+            responsive: true
         }
     });
 </script>
