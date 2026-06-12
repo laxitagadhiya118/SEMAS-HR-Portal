@@ -32,12 +32,17 @@
             </button>
 
             <!-- Dropdown Sidebar List -->
-            <nav class="sidebar-menu" id="sidebarMenu">
-                <a class="nav-item" href="/">📊 Dashboard</a>
-                <a class="nav-item" href="/employees">👥 Employees</a>
-                <a class="nav-item" href="/attendance">🕒 Attendance</a>
-                <a class="nav-item" href="/leave-requests">📋 Leave Requests</a>
-                <a class="nav-item" href="/reports">📑 Reports</a>
+            <nav class="sidebar-menu show-menu" id="sidebarMenu">
+                <a class="nav-item {% if request.path == '/' %}active-nav{% endif %}" href="/">📊 Dashboard</a>
+
+                <a class="nav-item {% if request.path.startswith('/employees') or request.path.startswith('/add-employee') or request.path.startswith('/edit-employee') %}active-nav{% endif %}" href="/employees">👥 Employees</a>
+
+                <a class="nav-item {% if request.path.startswith('/attendance') or request.path.startswith('/add-attendance') %}active-nav{% endif %}" href="/attendance">🕒 Attendance</a>
+
+                <a class="nav-item {% if request.path.startswith('/leave-requests') or request.path.startswith('/add-leave-request') %}active-nav{% endif %}" href="/leave-requests">📋 Leave Requests</a>
+
+                <a class="nav-item {% if request.path.startswith('/reports') %}active-nav{% endif %}" href="/reports">📑 Reports</a>
+
                 <a class="nav-item logout-item" href="/logout">🚪 Logout</a>
             </nav>
         </div>
@@ -53,8 +58,12 @@
                 <small>Smart Employee Management & Analytics System</small>
             </div>
 
-            <div class="admin-box">
-                Admin
+            <div class="admin-profile">
+                <div class="admin-avatar">A</div>
+                <div>
+                    <strong>Admin User</strong>
+                    <span>HR Manager</span>
+                </div>
             </div>
         </div>
 

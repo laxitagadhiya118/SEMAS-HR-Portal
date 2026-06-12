@@ -144,6 +144,14 @@ a {
     transform: translateX(5px);
 }
 
+/* Active sidebar page highlight */
+.active-nav {
+    background: #ffffff !important;
+    color: #1e3a8a !important;
+    border-left: 5px solid #60a5fa !important;
+    box-shadow: 0 8px 18px rgba(255, 255, 255, 0.20);
+}
+
 .logout-item {
     background: rgba(239, 68, 68, 0.20);
     color: #fee2e2;
@@ -186,6 +194,7 @@ a {
     color: #6b7280;
 }
 
+/* Old admin box support */
 .admin-box {
     background: #eff6ff;
     color: #1d4ed8;
@@ -193,6 +202,42 @@ a {
     border-radius: 999px;
     font-weight: 700;
     border: 1px solid #bfdbfe;
+}
+
+/* Professional admin profile topbar */
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 8px 14px;
+    border-radius: 999px;
+}
+
+.admin-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1d4ed8;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.admin-profile strong {
+    display: block;
+    color: #1e3a8a;
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.admin-profile span {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
 }
 
 .page-content {
@@ -532,6 +577,18 @@ a {
 }
 
 /* =========================
+   FOOTER
+========================= */
+
+.footer-note {
+    margin-top: 30px;
+    padding: 18px;
+    color: #64748b;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* =========================
    RESPONSIVE DESIGN
 ========================= */
 
@@ -587,5 +644,9 @@ a {
 
     .search-form input {
         min-width: 100%;
+    }
+
+    .admin-profile {
+        width: 100%;
     }
 }
