@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEMAS HR Portal</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom CSS -->
@@ -18,60 +18,67 @@
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <h2>SEMAS</h2>
-            <p>HR Portal</p>
-        </div>
 
-        <nav class="sidebar-menu">
-            <ul class="side-list">
-                <li>
+        <div>
+            <div class="sidebar-logo">
+                <h2>SEMAS</h2>
+                <p>HR Portal</p>
+            </div>
+
+            <!-- Sidebar List View Menu -->
+            <nav class="sidebar-menu">
+
+                <div class="sidebar-list-item">
                     <a href="/">
                         <span class="menu-icon">📊</span>
                         <span class="menu-text">Dashboard</span>
                     </a>
-                </li>
+                </div>
 
-                <li>
+                <div class="sidebar-list-item">
                     <a href="/employees">
                         <span class="menu-icon">👥</span>
                         <span class="menu-text">Employees</span>
                     </a>
-                </li>
+                </div>
 
-                <li>
+                <div class="sidebar-list-item">
                     <a href="/attendance">
                         <span class="menu-icon">🕒</span>
                         <span class="menu-text">Attendance</span>
                     </a>
-                </li>
+                </div>
 
-                <li>
+                <div class="sidebar-list-item">
                     <a href="/leave-requests">
                         <span class="menu-icon">📋</span>
                         <span class="menu-text">Leave Requests</span>
                     </a>
-                </li>
+                </div>
 
-                <li>
+                <div class="sidebar-list-item">
                     <a href="/reports">
                         <span class="menu-icon">📑</span>
                         <span class="menu-text">Reports</span>
                     </a>
-                </li>
-            </ul>
-        </nav>
+                </div>
 
+            </nav>
+        </div>
+
+        <!-- Sidebar Footer -->
         <div class="sidebar-footer">
             <a href="/logout">
                 <span class="menu-icon">🚪</span>
                 <span class="menu-text">Logout</span>
             </a>
         </div>
+
     </aside>
 
     <!-- Main Content -->
     <main class="content-area">
+
         <div class="topbar">
             <div>
                 <h4>Workforce Management Platform</h4>
@@ -86,6 +93,7 @@
         <div class="page-content">
             {% block content %}{% endblock %}
         </div>
+
     </main>
 
 </div>
