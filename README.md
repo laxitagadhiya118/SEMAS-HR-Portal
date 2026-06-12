@@ -5,6 +5,11 @@ SEMAS HR Portal is a full-stack employee management and HR analytics web applica
 The project is designed like a real company HR portal where an admin can manage employees, track attendance, manage leave requests, generate reports, and view workforce analytics from a professional dashboard.
 
 ---
+## Live Demo
+
+Live Website: https://semas-hr-portal.onrender.com/
+
+GitHub Repository: https://github.com/laxitagadhiya118/SEMAS-HR-Portal
 
 ## Project Overview
 
