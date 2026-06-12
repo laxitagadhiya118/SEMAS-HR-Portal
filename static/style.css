@@ -1,4 +1,4 @@
-
+```css
 /* =========================
    GLOBAL STYLE
 ========================= */
@@ -108,7 +108,7 @@ a {
 .sidebar-menu {
     display: none;
     margin-top: 14px;
-    flex-direction: column;
+    flex-direction: column !important;
     gap: 10px;
     background: rgba(15, 23, 42, 0.35);
     padding: 14px;
@@ -118,12 +118,14 @@ a {
 
 /* Dropdown menu visible after click */
 .sidebar-menu.show-menu {
-    display: flex;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
-.nav-item {
-    display: block;
-    width: 100%;
+/* Sidebar links */
+.sidebar-link {
+    display: block !important;
+    width: 100% !important;
     padding: 13px 16px;
     background: rgba(255, 255, 255, 0.10);
     color: #dbeafe;
@@ -137,7 +139,7 @@ a {
     transition: all 0.3s ease;
 }
 
-.nav-item:hover {
+.sidebar-link:hover {
     background: #ffffff;
     color: #1e3a8a;
     border-left: 5px solid #60a5fa;
@@ -152,6 +154,7 @@ a {
     box-shadow: 0 8px 18px rgba(255, 255, 255, 0.20);
 }
 
+/* Logout item */
 .logout-item {
     background: rgba(239, 68, 68, 0.20);
     color: #fee2e2;
@@ -192,16 +195,6 @@ a {
 
 .topbar small {
     color: #6b7280;
-}
-
-/* Old admin box support */
-.admin-box {
-    background: #eff6ff;
-    color: #1d4ed8;
-    padding: 9px 18px;
-    border-radius: 999px;
-    font-weight: 700;
-    border: 1px solid #bfdbfe;
 }
 
 /* Professional admin profile topbar */
@@ -266,6 +259,60 @@ a {
 .hero-section p {
     color: #dbeafe;
     margin-bottom: 0;
+}
+
+.business-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.hero-text p {
+    max-width: 620px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    margin-top: 22px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-summary {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 20px;
+    padding: 22px;
+    min-width: 210px;
+    text-align: center;
+}
+
+.hero-summary strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.hero-summary span {
+    display: block;
+    font-size: 13px;
+    color: #dbeafe;
+    margin-top: 5px;
 }
 
 .dashboard-card {
@@ -610,9 +657,19 @@ a {
         padding: 20px;
     }
 
-    .nav-item {
+    .sidebar-link {
         font-size: 14px;
         padding: 12px 13px;
+    }
+
+    .business-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-summary {
+        width: 100%;
+        text-align: left;
     }
 }
 
@@ -650,3 +707,4 @@ a {
         width: 100%;
     }
 }
+```

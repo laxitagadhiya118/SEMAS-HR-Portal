@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,17 +33,31 @@
 
             <!-- Dropdown Sidebar List -->
             <nav class="sidebar-menu show-menu" id="sidebarMenu">
-                <a class="nav-item {% if request.path == '/' %}active-nav{% endif %}" href="/">📊 Dashboard</a>
 
-                <a class="nav-item {% if request.path.startswith('/employees') or request.path.startswith('/add-employee') or request.path.startswith('/edit-employee') %}active-nav{% endif %}" href="/employees">👥 Employees</a>
+                <a class="sidebar-link {% if request.path == '/' %}active-nav{% endif %}" href="/">
+                    📊 Dashboard
+                </a>
 
-                <a class="nav-item {% if request.path.startswith('/attendance') or request.path.startswith('/add-attendance') %}active-nav{% endif %}" href="/attendance">🕒 Attendance</a>
+                <a class="sidebar-link {% if request.path.startswith('/employees') or request.path.startswith('/add-employee') or request.path.startswith('/edit-employee') %}active-nav{% endif %}" href="/employees">
+                    👥 Employees
+                </a>
 
-                <a class="nav-item {% if request.path.startswith('/leave-requests') or request.path.startswith('/add-leave-request') %}active-nav{% endif %}" href="/leave-requests">📋 Leave Requests</a>
+                <a class="sidebar-link {% if request.path.startswith('/attendance') or request.path.startswith('/add-attendance') %}active-nav{% endif %}" href="/attendance">
+                    🕒 Attendance
+                </a>
 
-                <a class="nav-item {% if request.path.startswith('/reports') %}active-nav{% endif %}" href="/reports">📑 Reports</a>
+                <a class="sidebar-link {% if request.path.startswith('/leave-requests') or request.path.startswith('/add-leave-request') %}active-nav{% endif %}" href="/leave-requests">
+                    📋 Leave Requests
+                </a>
 
-                <a class="nav-item logout-item" href="/logout">🚪 Logout</a>
+                <a class="sidebar-link {% if request.path.startswith('/reports') %}active-nav{% endif %}" href="/reports">
+                    📑 Reports
+                </a>
+
+                <a class="sidebar-link logout-item" href="/logout">
+                    🚪 Logout
+                </a>
+
             </nav>
         </div>
 
@@ -87,3 +102,4 @@
 
 </body>
 </html>
+```
